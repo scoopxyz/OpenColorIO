@@ -1,6 +1,6 @@
 version: '{branch}-{build}'
 image: Visual Studio 2015
-clone_folder: C:\projects\ocio
+clone_folder: C:\source\ocio
 test: off
 configuration:
     - Release
@@ -23,17 +23,17 @@ install:
   - dir %BOOST_ROOT%
   - set BOOST_LIBRARYDIR=C:\Libraries\boost\lib64-msvc-14.0
   - set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%BOOST_ROOT%
+  - set CMAKE_INSTALL_PREFIX=C:\software\ocio
   
 build_script:
   - echo Running cmake...
-  - cd c:\projects\ocio
-  - mkdir build
-  - mkdir build\windows64
-  - cd build\windows64
-  - cmake -G "%CMAKE_PLATFORM%" -DCMAKE_LIBRARY_PATH=%CMAKE_LIBRARY_PATH% -DCMAKE_INCLUDE_PATH=%CMAKE_INCLUDE_PATH%  -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DVERBOSE=1 ../..
-  - dir c:\projects\ocio
-  - dir c:\projects\ocio\build
-  - dir c:\projects\ocio\build\windows64
+  - mkdir C:\tmp\ociobuild
+  - mkdir C:\software\ocio
+  - cd \tmp\ociobuild
+  - cmake -G "%CMAKE_PLATFORM%" -DCMAKE_LIBRARY_PATH=%CMAKE_LIBRARY_PATH% -DCMAKE_INCLUDE_PATH=%CMAKE_INCLUDE_PATH%  -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DVERBOSE=1 .
+  - dir C:\source\ocio
+  - dir C:\tmp\ociobuild
+  - dir C:\software\ocio
   - cmake --build . --config %CONFIGURATION%
 
 matrix:
