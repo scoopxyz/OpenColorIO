@@ -24,7 +24,7 @@ install:
   - set BOOST_LIBRARYDIR=C:\Libraries\boost\lib64-msvc-14.0
   - set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%BOOST_ROOT%
   - set CMAKE_INSTALL_PREFIX=C:\software\ocio
-  - set USE_BOOST_PTR=1
+  - set OCIO_USE_BOOST_PTR=1
   
 build_script:
   - echo Running cmake...
