@@ -39,6 +39,7 @@
 
 #ifndef NOMINMAX
 #define NOMINMAX
+#endif 
 
 #include <vector>
 
