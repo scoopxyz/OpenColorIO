@@ -1,0 +1,40 @@
+version: '{branch}-{build}'
+image: Visual Studio 2015
+clone_folder: C:\source\ocio
+test: off
+configuration:
+    - Release
+platform:
+    - x64
+branches:
+    only:
+        - appveyor3
+    
+environment:
+  matrix:
+    - CMAKE_PLATFORM: "Visual Studio 14 2015 Win64"
+      PYTHON: "C:\Python27"
+
+install:
+  - cinstall: python
+  
+  # Boost
+  - set BOOST_ROOT=C:\Libraries\boost
+  - dir %BOOST_ROOT%
+  - set BOOST_LIBRARYDIR=C:\Libraries\boost\lib64-msvc-14.0
+  - set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%BOOST_ROOT%
+  - set CMAKE_INSTALL_PREFIX=C:\software\ocio
+  
+build_script:
+  - echo Running cmake...
+  - mkdir C:\tmp\ociobuild
+  - mkdir C:\software\ocio
+  - cd \tmp\ociobuild
+  - cmake -G "%CMAKE_PLATFORM%" -DCMAKE_LIBRARY_PATH=%CMAKE_LIBRARY_PATH% -DCMAKE_INCLUDE_PATH=%CMAKE_INCLUDE_PATH%  -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DVERBOSE=1 C:\source\ocio
+  - dir C:\source\ocio
+  - dir C:\tmp\ociobuild
+  - dir C:\software\ocio
+  - cmake --build . --config %CONFIGURATION%
+
+matrix:
+    fast_finish: true
