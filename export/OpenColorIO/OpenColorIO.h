@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifndef NOMINMAX
 #define NOMINMAX
+#endif 
 
 #include <exception>
 #include <iosfwd>
