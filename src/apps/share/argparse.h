@@ -37,10 +37,6 @@
 #ifndef OPENCOLORIO_ARGPARSE_H
 #define OPENCOLORIO_ARGPARSE_H
 
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif 
-
 #include <vector>
 
 #ifndef OPENCOLORIO_PRINTF_ARGS  /* See comments in strutil.h */
