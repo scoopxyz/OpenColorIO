@@ -1,5 +1,5 @@
 version: '{branch}-{build}'
-image: Visual Studio 2012
+image: Visual Studio 2013
 clone_folder: C:\source\ocio
 test: off
 configuration:
@@ -12,7 +12,7 @@ branches:
     
 environment:
   matrix:
-    - CMAKE_PLATFORM: "Visual Studio 11 2012 Win64"
+    - CMAKE_PLATFORM: "Visual Studio 12 2013 Win64"
       PYTHON: "C:\Python27"
 
 install:
