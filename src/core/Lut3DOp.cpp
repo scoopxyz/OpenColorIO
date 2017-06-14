@@ -754,7 +754,6 @@ OCIO_NAMESPACE_EXIT
 
 namespace OCIO = OCIO_NAMESPACE;
 #include "UnitTest.h"
-#include "timer.h"
 
 OIIO_ADD_TEST(Lut3DOp, NanInfValueCheck)
 {
@@ -905,6 +904,10 @@ OIIO_ADD_TEST(Lut3DOp, InverseComparisonCheck)
     OIIO_CHECK_EQUAL( ops[2]->isInverse(ops[3]), true);
 }
 
+#ifdef OCIO_USE_BOOST_PTR
+#include <boost/chrono.hpp>
+
+typedef boost::chrono::high_resolution_clock Timer;
 
 OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
 {
@@ -943,7 +946,7 @@ OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
         img[i] = uniform*1.1f - 0.05f;
     }
     
-     Timer mytimer;
+    Timer::time_point start = Timer::now()
     
     int numloops = 1024;
     for(int i=0; i<numloops; ++i)
@@ -952,22 +955,24 @@ OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
         OCIO::Lut3D_Linear(&img[0], xres*yres, lut);
     }
     
-    float t = mytimer();
-    float totaltime_a = t/numloops;
+    boost::chrono::duration<double> t = Timer::now() - start;
+    double sec = t.count();
+    double totaltime_a = sec/numloops;
     
     printf("Linear: %0.1f s  - %0.1f fps\n", totaltime_a, 1.0/totaltime_a);
 
 
     // Tetrahedral
-     mytimer.reset();
+    start = Timer::now()
 
     for(int i=0; i<numloops; ++i)
     {
         OCIO::Lut3D_Tetrahedral(&img[0], xres*yres, lut);
     }
 
-    t = mytimer();
-    float totaltime_b = t/numloops;
+    t = Timer::now() - start;
+    sec = t.count();
+    double totaltime_b = t/numloops;
 
     printf("Tetra: %0.1f s  - %0.1f fps\n", totaltime_b, 1.0/totaltime_b);
 
@@ -975,4 +980,5 @@ OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
     printf("Tetra is %.04f speed of Linear\n", speed_diff);
     */
 }
+#endif
 #endif // OCIO_UNIT_TEST
