@@ -750,10 +750,11 @@ OCIO_NAMESPACE_EXIT
 
 #include <cstring>
 #include <cstdlib>
-#include <sys/time.h>
+
 
 namespace OCIO = OCIO_NAMESPACE;
 #include "UnitTest.h"
+#include "timer.h"
 
 OIIO_ADD_TEST(Lut3DOp, NanInfValueCheck)
 {
@@ -942,9 +943,7 @@ OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
         img[i] = uniform*1.1f - 0.05f;
     }
     
-    timeval t;
-    gettimeofday(&t, 0);
-    double starttime = (double) t.tv_sec + (double) t.tv_usec / 1000000.0;
+     Timer mytimer;
     
     int numloops = 1024;
     for(int i=0; i<numloops; ++i)
@@ -953,27 +952,24 @@ OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
         OCIO::Lut3D_Linear(&img[0], xres*yres, lut);
     }
     
-    gettimeofday(&t, 0);
-    double endtime = (double) t.tv_sec + (double) t.tv_usec / 1000000.0;
-    double totaltime_a = (endtime-starttime)/numloops;
+    float t = mytimer();
+    float totaltime_a = t/numloops;
     
-    printf("Linear: %0.1f ms  - %0.1f fps\n", totaltime_a*1000.0, 1.0/totaltime_a);
+    printf("Linear: %0.1f s  - %0.1f fps\n", totaltime_a, 1.0/totaltime_a);
 
 
     // Tetrahedral
-    gettimeofday(&t, 0);
-    starttime = (double) t.tv_sec + (double) t.tv_usec / 1000000.0;
+     mytimer.reset();
 
     for(int i=0; i<numloops; ++i)
     {
         OCIO::Lut3D_Tetrahedral(&img[0], xres*yres, lut);
     }
 
-    gettimeofday(&t, 0);
-    endtime = (double) t.tv_sec + (double) t.tv_usec / 1000000.0;
-    double totaltime_b = (endtime-starttime)/numloops;
+    t = mytimer();
+    float totaltime_b = t/numloops;
 
-    printf("Tetra: %0.1f ms  - %0.1f fps\n", totaltime_b*1000.0, 1.0/totaltime_b);
+    printf("Tetra: %0.1f s  - %0.1f fps\n", totaltime_b, 1.0/totaltime_b);
 
     double speed_diff = totaltime_a/totaltime_b;
     printf("Tetra is %.04f speed of Linear\n", speed_diff);
