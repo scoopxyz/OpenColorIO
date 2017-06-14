@@ -1,5 +1,5 @@
 version: '{branch}-{build}'
-image: Visual Studio 2015
+image: Visual Studio 2012
 clone_folder: C:\source\ocio
 test: off
 configuration:
@@ -12,7 +12,7 @@ branches:
     
 environment:
   matrix:
-    - CMAKE_PLATFORM: "Visual Studio 14 2015 Win64"
+    - CMAKE_PLATFORM: "Visual Studio 11 2012 Win64"
       PYTHON: "C:\Python27"
 
 install:
@@ -30,7 +30,7 @@ build_script:
   - mkdir C:\tmp\ociobuild
   - mkdir C:\software\ocio
   - cd \tmp\ociobuild
-  - cmake -G "%CMAKE_PLATFORM%" -DCMAKE_LIBRARY_PATH=%CMAKE_LIBRARY_PATH% -DCMAKE_INCLUDE_PATH=%CMAKE_INCLUDE_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DOCIO_USE_BOOST_PTR=1 -DVERBOSE=1 C:\source\ocio
+  - cmake -G "%CMAKE_PLATFORM%" -DCMAKE_LIBRARY_PATH=%CMAKE_LIBRARY_PATH% -DCMAKE_INCLUDE_PATH=%CMAKE_INCLUDE_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DOCIO_USE_BOOST_PTR=1 -DOCIO_BUILD_APPS=0 -DVERBOSE=1 C:\source\ocio
   - dir C:\source\ocio
   - dir C:\tmp\ociobuild
   - dir C:\software\ocio
