@@ -32,7 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef OCIO_UNIT_TEST
 #pragma GCC visibility push(default)
 #include <unittest.h> // OIIO unit tests header
-OIIO_TEST_APP(OpenColorIO_Core_Unit_Tests)
+const char* appName = "OpenColorIO_Core_Unit_Tests"
+OIIO_TEST_APP(appName)
 #pragma GCC visibility pop
 #endif // OCIO_UNIT_TEST
 
