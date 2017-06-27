@@ -32,6 +32,7 @@
 #define OPENCOLORIO_UNITTEST_H
 
 #include <iostream>
+#include <string>
 #include <cmath>
 #include <vector>
 
