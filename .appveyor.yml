@@ -14,16 +14,18 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
       CMAKE_PLATFORM: "Visual Studio 12 2013 Win64"
+      BOOST_ROOT: C:\\Libraries\\boost
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       CMAKE_PLATFORM: "Visual Studio 14 2015 Win64"
+      BOOST_ROOT: C:\\Libraries\\boost
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       CMAKE_PLATFORM: "Visual Studio 15 2017 Win64"
+      BOOST_ROOT: C:\\Libraries\\boost_1_64_0
 
 install:
   - cinstall: python
   
   # Boost
-  - set BOOST_ROOT=C:\Libraries\boost
   - dir %BOOST_ROOT%
   - set BOOST_LIBRARYDIR=C:\Libraries\boost\lib64-msvc-14.0
   - set CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%;%BOOST_ROOT%
