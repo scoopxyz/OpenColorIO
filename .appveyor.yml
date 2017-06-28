@@ -1,7 +1,7 @@
 version: '{branch}-{build}'
 image: Visual Studio 2013
 clone_folder: C:\source\ocio
-test: off
+test: auto
 configuration:
     - Release
 platform:
