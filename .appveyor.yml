@@ -10,14 +10,19 @@ branches:
     only:
         - win
     
-environment:
-  matrix:
-    - CMAKE_PLATFORM: "Visual Studio 12 2013 Win64"
-      PYTHON: "C:\Python27"
-    - CMAKE_PLATFORM: "Visual Studio 14 2015 Win64"
-      PYTHON: "C:\Python27"
-    - CMAKE_PLATFORM: "Visual Studio 15 2017 Win64"
-      PYTHON: "C:\Python27"
+#environment:
+#  matrix:
+#    - CMAKE_PLATFORM: "Visual Studio 12 2013 Win64"
+#      PYTHON: "C:\Python27"
+#    - CMAKE_PLATFORM: "Visual Studio 14 2015 Win64"
+#      PYTHON: "C:\Python27"
+#    - CMAKE_PLATFORM: "Visual Studio 15 2017 Win64"
+#      PYTHON: "C:\Python27"
+
+image:
+  - Visual Studio 2013
+  - Visual Studio 2015
+  - Visual Studio 2017
 
 install:
   - cinstall: python
