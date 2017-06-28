@@ -903,82 +903,82 @@ OIIO_ADD_TEST(Lut3DOp, InverseComparisonCheck)
     OIIO_CHECK_EQUAL( ops[0]->isInverse(ops[3]), false);
     OIIO_CHECK_EQUAL( ops[2]->isInverse(ops[3]), true);
 }
-
-#ifdef OCIO_USE_BOOST_PTR
-#include <boost/chrono.hpp>
-
-typedef boost::chrono::high_resolution_clock Timer;
-
-OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
-{
-    /*
-    OCIO::Lut3D lut;
-    
-    lut.from_min[0] = 0.0f;
-    lut.from_min[1] = 0.0f;
-    lut.from_min[2] = 0.0f;
-    
-    lut.from_max[0] = 1.0f;
-    lut.from_max[1] = 1.0f;
-    lut.from_max[2] = 1.0f;
-    
-    lut.size[0] = 32;
-    lut.size[1] = 32;
-    lut.size[2] = 32;
-    
-    lut.lut.resize(lut.size[0]*lut.size[1]*lut.size[2]*3);
-    GenerateIdentityLut3D(&lut.lut[0], lut.size[0], 3, OCIO::LUT3DORDER_FAST_RED);
-    
-    std::vector<float> img;
-    int xres = 2048;
-    int yres = 1;
-    int channels = 4;
-    img.resize(xres*yres*channels);
-    
-    srand48(0);
-    
-    // create random values from -0.05 to 1.05
-    // (To simulate clipping performance)
-    
-    for(unsigned int i=0; i<img.size(); ++i)
-    {
-        float uniform = (float)drand48();
-        img[i] = uniform*1.1f - 0.05f;
-    }
-    
-    Timer::time_point start = Timer::now()
-    
-    int numloops = 1024;
-    for(int i=0; i<numloops; ++i)
-    {
-        //OCIO::Lut3D_Nearest(&img[0], xres*yres, lut);
-        OCIO::Lut3D_Linear(&img[0], xres*yres, lut);
-    }
-    
-    boost::chrono::duration<double> t = Timer::now() - start;
-    double sec = t.count();
-    double totaltime_a = sec/numloops;
-    
-    printf("Linear: %0.1f s  - %0.1f fps\n", totaltime_a, 1.0/totaltime_a);
-
-
-    // Tetrahedral
-    start = Timer::now()
-
-    for(int i=0; i<numloops; ++i)
-    {
-        OCIO::Lut3D_Tetrahedral(&img[0], xres*yres, lut);
-    }
-
-    t = Timer::now() - start;
-    sec = t.count();
-    double totaltime_b = t/numloops;
-
-    printf("Tetra: %0.1f s  - %0.1f fps\n", totaltime_b, 1.0/totaltime_b);
-
-    double speed_diff = totaltime_a/totaltime_b;
-    printf("Tetra is %.04f speed of Linear\n", speed_diff);
-    */
-}
-#endif
+//
+//    #ifdef OCIO_USE_BOOST_PTR
+//    #include <boost/chrono.hpp>
+//
+//    typedef boost::chrono::high_resolution_clock Timer;
+//
+//    OIIO_ADD_TEST(Lut3DOp, PerformanceCheck)
+//    {
+//        /*
+//        OCIO::Lut3D lut;
+//
+//        lut.from_min[0] = 0.0f;
+//        lut.from_min[1] = 0.0f;
+//        lut.from_min[2] = 0.0f;
+//
+//        lut.from_max[0] = 1.0f;
+//        lut.from_max[1] = 1.0f;
+//        lut.from_max[2] = 1.0f;
+//
+//        lut.size[0] = 32;
+//        lut.size[1] = 32;
+//        lut.size[2] = 32;
+//
+//        lut.lut.resize(lut.size[0]*lut.size[1]*lut.size[2]*3);
+//        GenerateIdentityLut3D(&lut.lut[0], lut.size[0], 3, OCIO::LUT3DORDER_FAST_RED);
+//
+//        std::vector<float> img;
+//        int xres = 2048;
+//        int yres = 1;
+//        int channels = 4;
+//        img.resize(xres*yres*channels);
+//
+//        srand48(0);
+//
+//        // create random values from -0.05 to 1.05
+//        // (To simulate clipping performance)
+//
+//        for(unsigned int i=0; i<img.size(); ++i)
+//        {
+//            float uniform = (float)drand48();
+//            img[i] = uniform*1.1f - 0.05f;
+//        }
+//
+//        Timer::time_point start = Timer::now()
+//
+//        int numloops = 1024;
+//        for(int i=0; i<numloops; ++i)
+//        {
+//            //OCIO::Lut3D_Nearest(&img[0], xres*yres, lut);
+//            OCIO::Lut3D_Linear(&img[0], xres*yres, lut);
+//        }
+//
+//        boost::chrono::duration<double> t = Timer::now() - start;
+//        double sec = t.count();
+//        double totaltime_a = sec/numloops;
+//
+//        printf("Linear: %0.1f s  - %0.1f fps\n", totaltime_a, 1.0/totaltime_a);
+//
+//
+//        // Tetrahedral
+//        start = Timer::now()
+//
+//        for(int i=0; i<numloops; ++i)
+//        {
+//            OCIO::Lut3D_Tetrahedral(&img[0], xres*yres, lut);
+//        }
+//
+//        t = Timer::now() - start;
+//        sec = t.count();
+//        double totaltime_b = t/numloops;
+//
+//        printf("Tetra: %0.1f s  - %0.1f fps\n", totaltime_b, 1.0/totaltime_b);
+//
+//        double speed_diff = totaltime_a/totaltime_b;
+//        printf("Tetra is %.04f speed of Linear\n", speed_diff);
+//        */
+//    }
+//    #endif
 #endif // OCIO_UNIT_TEST
