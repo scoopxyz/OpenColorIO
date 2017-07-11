@@ -8,7 +8,18 @@ picture production with an emphasis on visual effects and computer animation. As
 such, OCIO helps enforce a color management methodology that is required for the
 high fidelity color imaging in modern computer graphics. This section introduces
 those concepts and general workflow practices. Additional information can be
-found at Jeremy Selan's Cinematic Color `website <http://cinematiccolor.com>`_. 
+found at Jeremy Selan's Cinematic Color `website <http://cinematiccolor.com>`_.
+
+While OCIO is a color management library, it's only knowledge of color science
+comes from it's execution of the transforms defined in the OCIO configuration
+file. These transforms are either defined by the end user in a custom OCIO
+config or inherited from the publicly available configs.
+
+By specifying your desired ``config.ocio`` Config file in the local environment
+all OCIO compatible applications and software libraries will be able to see your
+defined color transform "universe", and direct the transformation of image data
+from one defined ``OCIO.ColorSpace`` to another, in addition to the other
+transforms documented elsewhere.
 
 Sony Pictures Imageworks Color Pipeline
 ***************************************
@@ -22,19 +33,20 @@ a guideline on how we choose to work.
 General Pipeline Observations
 -----------------------------
 
-* All images, on disk, contain colorspace information as a substring withing the
+* All images, on disk, contain colorspace information as a substring within the
   filename.  This is obeyed by all applications that load image, write images,
   or view images.  File extensions and metadata are ignored with regards to
   color processing.
 
- Example::
+Example::
 
       colorimage_lnf.exr  : lnf
       dataimage_ncf.exr : ncf
       plate_lg10.dpx : lg10
-      texture_dt8.tif: dt8
+      texture_dt8.tif : dt8
 
- .. note::
+.. note::
+
     File format extension does **NOT** imply a color space.  Not all .dpx
     files are lg10. Not all .tif images are dt8.
 
@@ -51,8 +63,8 @@ General Pipeline Observations
 * All pipelines that need to be colorspace aware rely
   on ``Config.parseColorSpaceFromString``.
 
-* Color configurations are show specific. The $OCIO environment variable is set
-  as part of a 'setshot' process, before other applications are launched.
+* Color configurations are show specific. The ``$OCIO`` environment variable is
+  set as part of a 'setshot' process, before other applications are launched.
   Artists are not allowed to work across different shows without using a fresh
   shell + setshot.
 
@@ -63,7 +75,7 @@ General Pipeline Observations
 
  * Example: We label 10-bit scanned film negatives as lg10. Even if two
    different shows use different acquisition film stocks, and rely on different
-   linearization curves, they are both labelled lg10.
+   linearization curves, they are both labeled lg10.
 
 * There is no explicit guarantee that image assets copied across shows will be
   transferable in a color-correct manner. For example, in the above film scan
@@ -77,21 +89,21 @@ Rendering
 ---------
 
 * Rendering and shading occurs in a scene-linear floating point space, typically
-  named "ln".  Half-float (16-bit) images are labelled lnh, full float images
-  (32-bit) are labelled lnf.
-
+  named "ln".  Half-float (16-bit) images are labeled lnh, full float images
+  (32-bit) are labeled lnf.
 
 * All image inputs should be converted to ln prior to render-time. Typically,
   this is done when textures are published. (See below) 
 
 * Renderer outputs are always floating-point. Color outputs are typically stored
-  as lnh (16-bit half float). Data outputs (normals, depth data, etc) are stored
-  as ncf ("not color" data, 32-bit full float). Lossy compression is never
-  utilized.
+  as lnh (16-bit half float). 
+
+* Data outputs (normals, depth data, etc) are stored as ncf ("not color" data,
+  32-bit full float). Lossy compression is never utilized.
 
 * Render outputs are always viewed with an OCIO compatible image viewer.
   Thus, for typical color imagery the lnf display transform will be applied.
-  In Nuke, this can be emulated using the OCIODisplay node. A standalone image
+  In Nuke, this can be emulated using the `OCIODisplay` node. A standalone image
   viewer, ociodisplay, is also included with OpenColorIO src/example.
 
 
@@ -104,21 +116,20 @@ Texture Painting / Matte Painting
 
 * At texture publish time, before mipmaps are generated, all color processing is
   applied.  Internally at SPI we use a modified version of OpenImageIO's maketx
-  that also links to OpenColorIO.  We intend to make this code available as soon
-  as possible.  In the meantime, the OpenColorIO 'ocioconvert' script included
-  in examples can be relied upon.  Color processing (linearization) is applied
-  before mipmap generation in order to assure energy preservation in the render.
+  that also links to OpenColorIO.  This code is available on the public OIIO 
+  repository. Color processing (linearization) is applied before mipmap
+  generation in order to assure energy preservation in the render.
   If the opposite processing order were used, (mipmap in the original space,
   color convert in the shader), the apparent intensity of texture values would
-  change as the object approached to receeded to the camera.
+  change as the object approached or receded from the camera.
 
 * The original texture filenames contain the colorspace information as a
   substring, to signify processing intent.
 
 * Textures that contain data (bump maps, opacity maps, blend maps, etc) are
-  labelled with the nc colorspaces according to their bitdepth.
+  labeled with the nc colorspaces according to their bitdepth.
 
-    *Example: an 8-bit opacity map -> skin_opacity_nc8.tif
+ *Example: an 8-bit opacity map -> skin_opacity_nc8.tif
 
 * Painted textures that are intended to modulate diffuse color components are
   labelled dt (standing for "diffuse texture").  The dt8 colorspace is designed
@@ -128,7 +139,7 @@ Texture Painting / Matte Painting
   is required in this case.  I.e., even if the original texture as painted was
   only 8-bits, the mipmapped texture will be stored as a 16-bit float image.
 
-* Painted environment maps, which may be emissive as labelled vd (standing for
+* Painted environment maps, which may be emissive as labeled vd (standing for
   'video'). These values, when linearized, have the potential to generate
   specular information well above 1.0. Note that in the current vd linearization
   curves, the top code values may be very "sensitive". I.e., very small changes
@@ -157,3 +168,9 @@ Compositing
   track of which colorspace is appropriate to use; the OCIOLogConvert node is
   always intended for this purpose.  (Within the OCIO profile, this is specified
   using the 'compositing_log' role).
+
+Further Information
+*******************
+
+Specific information with regard to the public OCIO configs can be found in the 
+:ref:`configurations` section.

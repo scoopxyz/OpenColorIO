@@ -30,8 +30,8 @@ There are two mailing lists associated with OpenColorIO:
 `ocio-dev <http://groups.google.com/group/ocio-dev>`__\ ``@googlegroups.com``
     For developers interested OCIO APIs, code integration, compilation, etc.
 
-Quickstart
-""""""""""
+Quick start
+""""""""""'
 
 Most users will likely want to use the OpenColorIO that comes precompiled with
 their applications.  See the :ref:`compatiblesoftware` for further details on
@@ -42,7 +42,7 @@ available separately on the :ref:`downloads` section of this site. Example
 images are also available. For assistance customizing .ocio configurations,
 contact `ocio-users <http://groups.google.com/group/ocio-users>`__\.
 
-- Step 1:  set the OCIO environment-variable to /path/to/your/profile.ocio
+- Step 1:  set the `OCIO` environment-variable to ``/path/to/your/config.ocio``
 - Step 2:  Launch supported application.
 
 If you are on a platform that is not envvar friendly, most applications also
