@@ -234,7 +234,6 @@ Environment variables
    This variable needs to point to the global OCIO config file, e.g
    ``config.ocio``
 
-
 .. envvar:: OCIO_LOGGING_LEVEL
 
     Configures OCIO's internal logging level. Valid values are
