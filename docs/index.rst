@@ -13,10 +13,8 @@ OpenColorIO is released as version 1.0 and has been in development since 2003.
 OCIO represents the culmination of years of production experience earned on such
 films as SpiderMan 2 (2004), Surf's Up (2007), Cloudy with a Chance of Meatballs
 (2009), Alice in Wonderland (2010), and many more. OpenColorIO is natively
-supported in commercial applications like Katana, Mari, Nuke, Silhouette FX, and others.
-
-OpenColorIO is free (http://opencolorio.org/License.html) and is one of
-several open source projects actively sponsored by Sony Imageworks (http://opensource.imageworks.com)
+supported in commercial applications like Katana, Mari, Nuke, Silhouette FX, and
+others.
 
 .. _mailing_lists:
 
@@ -32,17 +30,17 @@ There are two mailing lists associated with OpenColorIO:
 `ocio-dev <http://groups.google.com/group/ocio-dev>`__\ ``@googlegroups.com``
     For developers interested OCIO APIs, code integration, compilation, etc.
 
-Using OpenColorIO
-"""""""""""""""""
+Quickstart
+""""""""""
 
 Most users will likely want to use the OpenColorIO that comes precompiled with
 their applications.  See the :ref:`compatiblesoftware` for further details on
 each application.
 
-Note that OCIO configurations aren't required to do any 'real' work, and are
+Note that OCIO configurations are required to do any 'real' work, and are
 available separately on the :ref:`downloads` section of this site. Example
 images are also available. For assistance customizing .ocio configurations,
-contact the ocio-users email alias.
+contact `ocio-users <http://groups.google.com/group/ocio-users>`__\.
 
 - Step 1:  set the OCIO environment-variable to /path/to/your/profile.ocio
 - Step 2:  Launch supported application.
@@ -52,7 +50,8 @@ provide a menu option to select a different OCIO configuration after launch.
 
 Please be sure to select a profile that matches your color workflow (VFX work
 typically requires a different profile than animated features). If you need
-assistance picking a profile, email ocio-users.
+assistance picking a profile, email 
+`ocio-users <http://groups.google.com/group/ocio-users>`__\.
 
 Downloading and building the code
 """""""""""""""""""""""""""""""""
@@ -72,7 +71,7 @@ questions.
     :maxdepth: 2
     
     self
-    CompatibleSoftware
+    introduction
     
     configurations/index
     installation
@@ -81,6 +80,7 @@ questions.
     
     developers/index
     
+    CompatibleSoftware
     FAQ
     downloads
     
