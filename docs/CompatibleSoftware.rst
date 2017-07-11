@@ -267,7 +267,7 @@ particular focus on lighting and look development.
 
 Natron
 ******
-'Open Source Compositing Softare <http://natron.fr>'
+`Open Source Compositing Software <http://natron.fr>`
 
 CryEngine3 (Beta)
 *****************
