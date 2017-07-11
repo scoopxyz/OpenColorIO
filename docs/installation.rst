@@ -36,6 +36,10 @@ Then simply run the following command to install::
 
     brew install opencolorio
 
+To build with the Python library use this command::
+
+    brew install opencolorio --with-python
+
 
 .. _building-from-source:
 
