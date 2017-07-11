@@ -813,7 +813,6 @@ It's common to use literal ``|`` block syntax to preserve all newlines:
         This is one line.
         This is the second.
 
-.. _config-transforms:
 
 Available transforms
 ********************
