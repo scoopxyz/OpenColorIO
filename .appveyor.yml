@@ -29,6 +29,7 @@ build_script:
     -G "%CMAKE_PLATFORM%"
     -DOCIO_USE_BOOST_PTR=ON
     -DOCIO_BUILD_TESTS=ON
+    -DOCIO_BUILD_DOCS=ON
     ..
   - cmake --build . --target install --config %CONFIGURATION%
 
