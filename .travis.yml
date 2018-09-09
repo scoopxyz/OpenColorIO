@@ -21,7 +21,7 @@ matrix:
       osx_image: xcode9.1
 
 env:
-  - OPTIONS="-DCMAKE_BUILD_TYPE=Release -DOCIO_BUILD_TESTS=yes -DOCIO_BUILD_DOCS=yes"
+  - OPTIONS="-DCMAKE_BUILD_TYPE=Release -DOCIO_BUILD_TESTS=ON -DOCIO_BUILD_DOCS=ON -DOCIO_WARNING_AS_ERROR=ON"
 
 # Install missing packages
 before_install:
