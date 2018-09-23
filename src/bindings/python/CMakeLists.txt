@@ -1,5 +1,5 @@
-find_package(PythonLibs REQUIRED)
-find_package(PythonInterp REQUIRED)
+find_package(PythonLibs 2.7 REQUIRED)
+find_package(PythonInterp 2.7 REQUIRED)
 
 
 set(SOURCES
@@ -40,6 +40,7 @@ add_custom_command(OUTPUT ${PYDOC_OUTPUT}
 # Python libs
 
 add_library(PyOpenColorIO ${SOURCES} ${PYDOC_OUTPUT})
+add_definitions(-DPYOCIO_NAME=PyOpenColorIO)
 set_target_properties(PyOpenColorIO PROPERTIES
 	PREFIX ""
 )
@@ -51,9 +52,8 @@ target_include_directories(PyOpenColorIO
 	SYSTEM
 		${PYTHON_INCLUDE_DIRS}
 )
-target_link_libraries(PyOpenColorIO 
+target_link_libraries(PyOpenColorIO
 	PUBLIC
 		${PYTHON_LIBRARIES}
 		OpenColorIO
 )
-

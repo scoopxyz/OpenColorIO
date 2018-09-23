@@ -4,6 +4,7 @@ enable_testing()
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/share/cmake)
 set(CMAKE_WARN_DEPRECATED ON)
@@ -78,10 +79,11 @@ endif()
 # Progress to other sources
 
 add_subdirectory(include)
-add_subdirectory(ext)
+add_subdirectory(thirdparty)
 add_subdirectory(src)
 if(OCIO_BUILD_DOCS)
-	add_subdirectory(docs)
+	add_subdirectory(doc)
 endif()
-add_subdirectory(testdata)
-add_subdirectory(tests)
+if(OCIO_BUILD_TESTS OR OCIO_BUILD_GPU_TESTS)
+	add_subdirectory(test)
+endif()

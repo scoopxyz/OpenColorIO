@@ -1,4 +1,4 @@
-
+add_subdirectory(data)
 if(OCIO_BUILD_TESTS)
 	add_subdirectory(cpu)
 endif()

@@ -1,7 +1,5 @@
-set(SOURCES
-	argparse.cpp
-	strutil.cpp
-)
+add_subdirectory(pystring)
 
-add_library(util STATIC ${SOURCES})
-target_include_directories(util PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+if(OCIO_BUILD_GPU_TESTS)
+	add_subdirectory(openglbuilder)
+endif()

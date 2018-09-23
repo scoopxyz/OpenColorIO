@@ -6,7 +6,7 @@
 import sys, os
 
 # -- Add PyOpenColorIO to sys.path
-sys.path.insert(0, "@CMAKE_BINARY_DIR@/src/pyglue")
+sys.path.insert(0, "@CMAKE_BINARY_DIR@/src/bindings/python")
 
 # -- General configuration -----------------------------------------------------
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.ifconfig']

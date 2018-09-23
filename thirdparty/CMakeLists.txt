@@ -18,15 +18,15 @@ add_library(tinyxml INTERFACE IMPORTED GLOBAL)
 if(USE_EXTERNAL_TINYXML)
 	find_package(TinyXML 2.6.1 REQUIRED)
 else()
-	set(TINYXML_INSTALL_DIR "${CMAKE_BINARY_DIR}/ext/dist")
+	set(TINYXML_INSTALL_DIR "${CMAKE_BINARY_DIR}/thirdparty/dist")
 	set(TINYXML_CMAKE_ARGS
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		-DBUILD_SHARED_LIBS:BOOL=OFF
-		-DCMAKE_INSTALL_PREFIX=${TINYXML_INSTALL_DIR} 
+		-DCMAKE_INSTALL_PREFIX=${TINYXML_INSTALL_DIR}
 		-DOCIO_INLINES_HIDDEN:BOOL=${OCIO_INLINES_HIDDEN}
 	)
 	if(CMAKE_TOOLCHAIN_FILE)
-		set(TINYXML_CMAKE_ARGS 
+		set(TINYXML_CMAKE_ARGS
 			${TINYXML_CMAKE_ARGS}
 			-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
 		)
@@ -38,9 +38,9 @@ else()
 	endif()
 
 	ExternalProject_Add(TinyXML
-		URL "${CMAKE_SOURCE_DIR}/ext/tinyxml_2_6_1.tar.gz"
-		PATCH_COMMAND ${PATCH_COMMAND} -f -p 1 < "${CMAKE_SOURCE_DIR}/ext/tinyxml_2_6_1.patch"
-		BINARY_DIR "${CMAKE_BINARY_DIR}/ext/build/tinyxml"
+		URL "${CMAKE_SOURCE_DIR}/thirdparty/tinyxml_2_6_1.tar.gz"
+		PATCH_COMMAND ${PATCH_COMMAND} -f -p 1 < "${CMAKE_SOURCE_DIR}/thirdparty/tinyxml_2_6_1.patch"
+		BINARY_DIR "${CMAKE_BINARY_DIR}/thirdparty/build/tinyxml"
 		INSTALL_DIR "${TINYXML_INSTALL_DIR}"
 		CMAKE_ARGS ${TINYXML_CMAKE_ARGS}
 		EXCLUDE_FROM_ALL TRUE
@@ -65,7 +65,7 @@ if(USE_EXTERNAL_YAML)
 	find_package(YamlCpp 0.3.0 REQUIRED)
 else()
 	set(YAMLCPP_VERSION "0.3.0")
-	set(YAML_CPP_INSTALL_DIR "${CMAKE_BINARY_DIR}/ext/dist")
+	set(YAML_CPP_INSTALL_DIR "${CMAKE_BINARY_DIR}/thirdparty/dist")
 	set(YAML_CPP_CMAKE_ARGS
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		-DBUILD_SHARED_LIBS:BOOL=OFF
@@ -85,9 +85,9 @@ else()
 		message(WARNING " Building STATIC libOpenColorIO using the in-built Yaml-cpp. Yaml-cpp's symbols are NOT included in the output binary!")
 	endif()
 	ExternalProject_Add(Yaml-cpp
-		URL "${CMAKE_SOURCE_DIR}/ext/yaml-cpp-${YAMLCPP_VERSION}.tar.gz"
-		PATCH_COMMAND ${PATCH_COMMAND} -f -p 1 < "${CMAKE_SOURCE_DIR}/ext/yaml-cpp-${YAMLCPP_VERSION}.patch"
-		BINARY_DIR "${CMAKE_BINARY_DIR}/ext/build/yaml-cpp"
+		URL "${CMAKE_SOURCE_DIR}/thirdparty/yaml-cpp-${YAMLCPP_VERSION}.tar.gz"
+		PATCH_COMMAND ${PATCH_COMMAND} -f -p 1 < "${CMAKE_SOURCE_DIR}/thirdparty/yaml-cpp-${YAMLCPP_VERSION}.patch"
+		BINARY_DIR "${CMAKE_BINARY_DIR}/thirdparty/build/yaml-cpp"
 		INSTALL_DIR "${YAML_CPP_INSTALL_DIR}"
 		CMAKE_ARGS ${YAML_CPP_CMAKE_ARGS}
 		EXCLUDE_FROM_ALL TRUE
@@ -112,16 +112,16 @@ add_library(lcms2 INTERFACE IMPORTED GLOBAL)
 if(USE_EXTERNAL_LCMS)
 	find_package(LCMS2 2.1 REQUIRED)
 else()
-	set(LCMS2_INSTALL_DIR "${CMAKE_BINARY_DIR}/ext/dist")
+	set(LCMS2_INSTALL_DIR "${CMAKE_BINARY_DIR}/thirdparty/dist")
 	set(LCMS2_CMAKE_ARGS
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		-DBUILD_SHARED_LIBS:BOOL=OFF
 		-DCMAKE_INSTALL_PREFIX=${LCMS2_INSTALL_DIR}
 	)
 	ExternalProject_Add(LCMS2
-		URL "${CMAKE_SOURCE_DIR}/ext/lcms2-2.1.tar.gz"
-		PATCH_COMMAND ${PATCH_COMMAND} -f -p 1 < "${CMAKE_SOURCE_DIR}/ext/lcms2-2.1.patch"
-		BINARY_DIR "${CMAKE_BINARY_DIR}/ext/build/lcms2"
+		URL "${CMAKE_SOURCE_DIR}/thirdparty/lcms2-2.1.tar.gz"
+		PATCH_COMMAND ${PATCH_COMMAND} -f -p 1 < "${CMAKE_SOURCE_DIR}/thirdparty/lcms2-2.1.patch"
+		BINARY_DIR "${CMAKE_BINARY_DIR}/thirdparty/build/lcms2"
 		INSTALL_DIR "${LCMS2_INSTALL_DIR}"
 		CMAKE_ARGS ${LCMS2_CMAKE_ARGS}
 	)
