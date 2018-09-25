@@ -1,3 +1,4 @@
+find_package(GLEW REQUIRED)
 find_package(GLUT REQUIRED)
 
 set(SOURCES
@@ -14,6 +15,7 @@ set(SOURCES
 add_executable(test_gpu_exec ${SOURCES})
 target_include_directories(test_gpu_exec
 	PRIVATE
+		${GLEW_INCLUDE_DIR}
 		${GLUT_INCLUDE_DIR}
 )
 target_link_libraries(test_gpu_exec
@@ -21,6 +23,7 @@ target_link_libraries(test_gpu_exec
 		OpenColorIO
 		openglbuilder
 		unittest_data
+		${GLEW_LIBRARIES}
 		${GLUT_LIBRARIES}
 )
 
