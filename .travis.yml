@@ -30,6 +30,10 @@ before_install:
       sudo apt-get update -qq;
       sudo apt-get install -y -qq texlive-full;
       sudo apt-get install -y -qq freeglut3-dev libglew-dev libxmu-dev libxi-dev;
+      mkdir ${TRAVIS_BUILD_DIR}/_cmake;
+      https://cmake.org/files/v3.12/cmake-3.12.2-Linux-x86_64.sh;
+      sh cmake-3.12.2-Linux-x86_64.sh -- --skip-license --prefix=${TRAVIS_BUILD_DIR}/_cmake;
+      export PATH="${TRAVIS_BUILD_DIR}/_cmake/bin:$PATH";
     fi
   # OSX ones
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -39,6 +43,8 @@ before_install:
       source .bash_profile;
       pyenv install 3.5.2;
       pyenv global 3.5.2;
+      export OPTIONS="$OPTIONS -DPYTHON_LIBRARY=$(python-config --prefix)/lib/libpython2.7.dylib";
+      export OPTIONS="$OPTIONS -DPYTHON_INCLUDE_DIR=$(python-config --prefix)/include/python2.7";
     fi
 
 # Run the Build script
@@ -47,7 +53,7 @@ script:
   - cd _build
   - cmake .. -DCMAKE_INSTALL_PREFIX=../_install $OPTIONS
   - cmake --build . --target install
-  - cmake --build . --target test -- CTEST_OUTPUT_ON_FAILURE=TRUE
+  - ctest -V
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cmake --build . --target pdf; fi
 
 deploy:

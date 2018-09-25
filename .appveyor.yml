@@ -30,7 +30,7 @@ build_script:
     -DCMAKE_BUILD_TYPE=%CONFIGURATION%
     ..
   - cmake --build . --target install --config %CONFIGURATION%
-  - cmake --build . --target test -- CTEST_OUTPUT_ON_FAILURE=TRUE
+  - ctest -V
 
 matrix:
     fast_finish: true
