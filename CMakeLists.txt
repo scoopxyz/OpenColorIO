@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(OpenColorIO VERSION 2.0.0)
 enable_testing()
+INCLUDE(FeatureSummary)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -25,11 +26,22 @@ option(OCIO_BUILD_GPU_TESTS "Specify whether to build gpu unittests" ON)
 option(OCIO_BUILD_PYTHON "Specify whether to build python bindings" ON)
 option(OCIO_BUILD_JAVA "Specify whether to build java bindings" OFF)
 
+# CMake Features Status
+add_feature_info("OCIO Shared Library" BUILD_SHARED_LIBS "Build Type: ${CMAKE_BUILD_TYPE}")
+add_feature_info("OCIO Nuke Plugins" OCIO_BUILD_NUKE "")
+add_feature_info("OCIO Docs" OCIO_BUILD_DOCS "")
+add_feature_info("OCIO Dev CPU-Tests" OCIO_BUILD_TESTS "")
+add_feature_info("OCIO Dev GPU-Tests" OCIO_BUILD_GPU_TESTS "")
+
 ###############################################################################
 # Optimisation / internal linking preferences
 
 option(OCIO_USE_SSE "Specify whether to enable SSE CPU performance optimizations" ON)
 option(OCIO_INLINES_HIDDEN "Specify whether to build with -fvisibility-inlines-hidden" ${UNIX})
+
+# CMake Features Status
+add_feature_info("OCIO SSE Optimizations" OCIO_USE_SSE "")
+add_feature_info("OCIO Hidden Inlines" OCIO_INLINES_HIDDEN "")
 
 ###############################################################################
 # External linking
@@ -84,3 +96,11 @@ if(OCIO_BUILD_DOCS)
 	add_subdirectory(docs)
 endif()
 add_subdirectory(tests)
+
+###############################################################################
+# build summary
+
+message(STATUS "")
+message(STATUS "######## OCIO BUILD SUMMARY ########")
+message(STATUS "")
+feature_summary(WHAT ALL)

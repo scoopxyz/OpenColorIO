@@ -67,7 +67,7 @@ target_include_directories(PyOpenColorIO
 	SYSTEM
 		${PYTHON_INCLUDE_DIRS}
 )
-target_link_libraries(PyOpenColorIO 
+target_link_libraries(PyOpenColorIO
 	PUBLIC
 		${PYTHON_LIBRARIES}
 		OpenColorIO

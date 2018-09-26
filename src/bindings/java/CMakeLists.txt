@@ -87,7 +87,7 @@ set(JNIOCIO_CLASSES
   org.OpenColorIO.LogTransform
   org.OpenColorIO.LookTransform
   org.OpenColorIO.MatrixTransform
-  org.OpenColorIO.TruelightTransform	
+  org.OpenColorIO.TruelightTransform
 )
 
 configure_file(Manifest.txt.in ${CMAKE_CURRENT_BINARY_DIR}/Manifest.txt @ONLY)
