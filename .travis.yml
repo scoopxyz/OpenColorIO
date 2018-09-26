@@ -29,16 +29,12 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo apt-get update -qq;
       sudo apt-get install -y -qq texlive-full;
-      sudo apt-get install -y -qq freeglut3-dev libglew-dev libxmu-dev libxi-dev;
-      mkdir ${TRAVIS_BUILD_DIR}/_cmake;
-      https://cmake.org/files/v3.12/cmake-3.12.2-Linux-x86_64.sh;
-      sh cmake-3.12.2-Linux-x86_64.sh -- --skip-license --prefix=${TRAVIS_BUILD_DIR}/_cmake;
-      export PATH="${TRAVIS_BUILD_DIR}/_cmake/bin:$PATH";
+      sudo apt-get install -y -qq freeglut3-dev libglew-dev libxmu-dev libxi-dev cmake_3.10.2;
     fi
   # OSX ones
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update;
-      brew install glew;
+      brew install glew cmake --HEAD;
       echo 'eval "$(pyenv init -)"' >> .bash_profile;
       source .bash_profile;
       pyenv install 3.5.2;
