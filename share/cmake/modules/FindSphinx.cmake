@@ -67,7 +67,7 @@ if(NOT Sphinx_FOUND)
     if(WIN32)
         set(Sphinx_EXECUTABLE "${_EXT_DIST_ROOT}/Scripts/sphinx-build")
         # On Windows platform, pip is in the Scripts sub-directory.
-        set(_Python_PIP "${Python_SCRIPTS_DIR}/pip.exe")
+        set(_Python_PIP "${_Python_SCRIPTS_DIR}/pip.exe")
     else()
         set(Sphinx_EXECUTABLE "${_EXT_DIST_ROOT}/bin/sphinx-build")
         set(_Python_PIP "pip")
