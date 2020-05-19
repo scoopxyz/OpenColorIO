@@ -206,7 +206,7 @@ jobs:
                 -DOCIO_USE_SSE=${{ matrix.use-sse }} \
                 -DOCIO_INSTALL_EXT_PACKAGES=ALL \
                 -DOCIO_WARNING_AS_ERROR=ON \
-                -DPYTHON_EXECUTABLE=$(which python)
+                -DPython_EXECUTABLE=$(which python)
         working-directory: _build
       - name: Build
         run: |
@@ -300,7 +300,7 @@ jobs:
                 -DOCIO_USE_SSE=${{ matrix.use-sse }} \
                 -DOCIO_INSTALL_EXT_PACKAGES=ALL \
                 -DOCIO_WARNING_AS_ERROR=ON \
-                -DPYTHON_EXECUTABLE=$(which python)
+                -DPython_EXECUTABLE=$(which python)
         working-directory: _build
       - name: Build
         run: |
@@ -398,7 +398,7 @@ jobs:
                 -DOCIO_USE_SSE=${{ matrix.use-sse }} \
                 -DOCIO_INSTALL_EXT_PACKAGES=ALL \
                 -DOCIO_WARNING_AS_ERROR=ON \
-                -DPYTHON_EXECUTABLE=$(which python)
+                -DPython_EXECUTABLE=$(which python)
         shell: bash
         working-directory: _build
       - name: Build
