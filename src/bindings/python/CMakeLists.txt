@@ -3,9 +3,13 @@
 
 ###############################################################################
 # External dependencies
+if(${CMAKE_VERSION} VERSION_LESS "3.12.0") 
+	find_package(PythonInterp 2.7 REQUIRED)
+	find_package(PythonLibs 2.7 REQUIRED)
+else()
+	find_package(Python COMPONENTS Interpreter Development)
+endif()
 
-find_package(PythonInterp 2.7 REQUIRED)
-find_package(PythonLibs 2.7 REQUIRED)
 
 # pybind11
 # https://github.com/pybind/pybind11

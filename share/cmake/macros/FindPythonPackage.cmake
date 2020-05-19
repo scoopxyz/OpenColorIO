@@ -18,7 +18,11 @@
 # installed via pip at build time.
 #
 
-find_package(PythonInterp 2.7 QUIET)
+if(${CMAKE_VERSION} VERSION_LESS "3.12.0") 
+	find_package(PythonInterp 2.7 QUIET)
+else()
+	find_package(Python COMPONENTS Interpreter)
+endif()
 
 macro(find_python_package package version)
     string(TOUPPER ${package} _PKG_UPPER)
