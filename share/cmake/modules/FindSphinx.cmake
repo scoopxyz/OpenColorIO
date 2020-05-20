@@ -27,7 +27,8 @@ if(NOT TARGET Sphinx)
 endif()
 
 if(Python_Interpreter_FOUND AND WIN32)
-    set(_Python_SCRIPTS_DIR "${Python_ROOT_DIR}/Scripts")
+    get_filename_component(_Python_ROOT "${Python_EXECUTABLE}" DIRECTORY)
+    set(_Python_SCRIPTS_DIR "${_Python_ROOT}/Scripts")
 endif()
 
 ###############################################################################
