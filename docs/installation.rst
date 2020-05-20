@@ -203,7 +203,7 @@ for compiling on Windows as provided by `@hodoulp <https://github.com/hodoulp>`_
     set CMAKE_PATH=D:\OpenSource\3rdParty\cmake-3.12.2
     set GLUT_PATH=D:\OpenSource\3rdParty\freeglut-3.0.0-2
     set GLEW_PATH=D:\OpenSource\3rdParty\glew-1.9.0
-    set Python_PATH=C:\Python27
+    set PYTHON_PATH=C:\Python27
 
     REM Add glut & glew dependencies to have GPU unit tests
     set PATH=%GLEW_PATH%\bin;%GLUT_PATH%\bin;D:\Tools\cygwin64\bin;%CMAKE_PATH%\bin;%PATH%
